@@ -8,10 +8,10 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 preprocessor = joblib.load("data/hasil_proses/preprocessor.pkl")
-X_train, X_test, y_train, y_test = joblib.load("data/hasil_proses/split_data.pkl")
+x_train, x_test, y_train, y_test = joblib.load("data/hasil_proses/split_data.pkl")
 
-X_train_prep = preprocessor.transform(X_train)
-X_test_prep = preprocessor.transform(X_test)
+x_train_prep = preprocessor.transform(x_train)
+x_test_prep = preprocessor.transform(x_test)
 
 rf = RandomForestRegressor(
     n_estimators=200,
@@ -19,52 +19,52 @@ rf = RandomForestRegressor(
     n_jobs=-1
 )
 
-rf.fit(X_train_prep, y_train)
-y_pred = rf.predict(X_test_prep)
+rf.fit(x_train_prep, y_train)
+y_prediction = rf.predict(x_test_prep)
 
-mae_before = mean_absolute_error(y_test, y_pred)
-rmse_before = np.sqrt(mean_squared_error(y_test, y_pred))
-r2_before = r2_score(y_test, y_pred)
+mae_before = mean_absolute_error(y_test, y_prediction)
+rmse_before = np.sqrt(mean_squared_error(y_test, y_prediction))
+r2_before = r2_score(y_test, y_prediction)
 
-residuals = y_test - y_pred
+residual = y_test - y_prediction
 
 os.makedirs("results/gambar", exist_ok=True)
 
 plt.figure(figsize=(8,5))
-sns.histplot(residuals, kde=True)
+sns.histplot(residual, kde=True)
 plt.title("Distribusi Residual (Sebelum Outlier Removal)")
 plt.savefig("results/gambar/residual_distribution_before.png")
 plt.close()
 
 plt.figure(figsize=(8,5))
-plt.scatter(y_pred, residuals, alpha=0.3)
+plt.scatter(y_prediction, residual, alpha=0.3)
 plt.axhline(0, color='red')
 plt.title("Residual vs Predicted")
 plt.savefig("results/gambar/residual_vs_predicted.png")
 plt.close()
 
-Q1 = np.percentile(residuals, 25)
-Q3 = np.percentile(residuals, 75)
+Q1 = np.percentile(residual, 25)
+Q3 = np.percentile(residual, 75)
 IQR = Q3 - Q1
 
 lower_bound = Q1 - 1.5 * IQR
 upper_bound = Q3 + 1.5 * IQR
 
-mask = (residuals >= lower_bound) & (residuals <= upper_bound)
+mask = (residual >= lower_bound) & (residual <= upper_bound)
 
-X_test_clean = X_test_prep[mask]
+x_test_clean = x_test_prep[mask]
 y_test_clean = y_test[mask]
 
-y_pred_clean = rf.predict(X_test_clean)
+y_prediction_clean = rf.predict(x_test_clean)
 
-mae_after = mean_absolute_error(y_test_clean, y_pred_clean)
-rmse_after = np.sqrt(mean_squared_error(y_test_clean, y_pred_clean))
-r2_after = r2_score(y_test_clean, y_pred_clean)
+mae_after = mean_absolute_error(y_test_clean, y_prediction_clean)
+rmse_after = np.sqrt(mean_squared_error(y_test_clean, y_prediction_clean))
+r2_after = r2_score(y_test_clean, y_prediction_clean)
 
-residuals_clean = y_test_clean - y_pred_clean
+residual_clean = y_test_clean - y_prediction_clean
 
 plt.figure(figsize=(8,5))
-sns.histplot(residuals_clean, kde=True)
+sns.histplot(residual_clean, kde=True)
 plt.title("Distribusi Residual (Setelah Outlier Removal)")
 plt.savefig("results/gambar/residual_distribution_after.png")
 plt.close()
