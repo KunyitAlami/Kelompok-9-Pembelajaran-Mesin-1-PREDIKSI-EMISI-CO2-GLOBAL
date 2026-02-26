@@ -1,0 +1,11 @@
+feature,importance
+greenhouse_gas_emissions,0.9755514133899263
+coal_share_elec,0.003021147167768786
+nuclear_share_elec,0.002258890322194462
+primary_energy_consumption,0.0020541661313579346
+gas_share_energy,0.001995695434143223
+other_renewables_share_elec,0.0009756711429518493
+carbon_intensity_elec,0.000932190911986198
+oil_energy_per_capita,0.0009242686235530547
+nuclear_elec_per_capita,0.0008807155666908216
+hydro_share_elec,0.0007271612993444507

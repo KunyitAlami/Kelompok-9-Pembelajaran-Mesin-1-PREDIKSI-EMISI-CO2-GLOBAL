@@ -36,4 +36,4 @@ updated = pd.concat([existing, new_result], ignore_index=True)
 updated.to_csv("results/eksperimen_log.csv", index=False)
 
 print(updated)
-print("Model XGBoost Regression selesai")
+print("Base Model XGBoost Regression selesai")
