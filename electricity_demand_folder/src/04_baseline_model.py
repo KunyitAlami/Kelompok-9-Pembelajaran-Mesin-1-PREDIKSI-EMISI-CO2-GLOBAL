@@ -37,4 +37,3 @@ os.makedirs("results", exist_ok=True)
 results.to_csv("results/eksperimen_log.csv", index=False)
 
 print(results)
-print("Baseline selesai")
