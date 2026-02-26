@@ -27,4 +27,4 @@ plt.title("Correlation Matrix")
 plt.savefig("results/gambar/correlation_matrix.png")
 plt.close()
 
-print("Proses EDA selesai")
+print("Selesai")
