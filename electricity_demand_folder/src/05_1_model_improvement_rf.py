@@ -13,7 +13,7 @@ X_test_prep = preprocessor.transform(X_test)
 
 depths = [5, 10, 20, None]
 
-results_list = []
+daftar_hasil = []
 
 for depth in depths:
     rf = RandomForestRegressor(
@@ -29,24 +29,24 @@ for depth in depths:
     
     y_pred = rf.predict(X_test_prep)
     
-    mae = mean_absolute_error(y_test, y_pred)
-    rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-    r2 = r2_score(y_test, y_pred)
+    tingkat_mae = mean_absolute_error(y_test, y_pred)
+    tingkat_rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+    akurasi_r2 = r2_score(y_test, y_pred)
     
-    results_list.append([
+    daftar_hasil.append([
         f"RandomForest_depth_{depth}",
-        mae,
-        rmse,
-        r2,
+        tingkat_mae,
+        tingkat_rmse,
+        akurasi_r2,
         rf.oob_score_
     ])
 
-results_df = pd.DataFrame(
-    results_list,
+df_hasil = pd.DataFrame(
+    daftar_hasil,
     columns=["model", "MAE", "RMSE", "R2", "OOB_Score"]
 )
 
-best_model_index = results_df["R2"].idxmax()
+best_model_index = df_hasil["R2"].idxmax()
 best_depth = depths[best_model_index]
 
 rf_best = RandomForestRegressor(
@@ -74,10 +74,10 @@ os.makedirs("results", exist_ok=True)
 top10.to_csv("results/rf_top10_feature_importance.csv", index=False)
 
 existing = pd.read_csv("results/eksperimen_log.csv")
-updated = pd.concat([existing, results_df], ignore_index=True)
+updated = pd.concat([existing, df_hasil], ignore_index=True)
 updated.to_csv("results/eksperimen_log.csv", index=False)
 
-print(results_df)
+print(df_hasil)
 print("\nTop 10 Feature Importance:")
 print(top10)
 print("\nRandom Forest tuning selesai")

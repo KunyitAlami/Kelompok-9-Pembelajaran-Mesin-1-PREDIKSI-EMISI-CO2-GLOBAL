@@ -70,8 +70,8 @@ plt.savefig("results/gambar/residual_distribution_after.png")
 plt.close()
 
 stress_result = pd.DataFrame([
-    ["Before Outlier Removal", mae_before, rmse_before, r2_before],
-    ["After Outlier Removal", mae_after, rmse_after, r2_after]
+    ["Sebelum Outlier Removal", mae_before, rmse_before, r2_before],
+    ["Setelah Outlier Removal", mae_after, rmse_after, r2_after]
 ], columns=["Condition", "MAE", "RMSE", "R2"])
 
 stress_result.to_csv("results/stress_test_results.csv", index=False)
