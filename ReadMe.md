@@ -35,10 +35,13 @@ Berdasarkan ekstraksi **Feature Importance**, fitur `greenhouse_gas_emissions` (
 Untuk membuktikan bahwa model tidak sekadar menghafal data, kami merancang modul **Stress Test** pasca-pelatihan secara manual. Modul ini mendeteksi anomali dengan menghitung *residual* (selisih aktual vs prediksi) dan menerapkan batas statistik **IQR (Interquartile Range)**.
 
 **Hasil Stress Test (Penghapusan Outlier Ekstrem):**
-Sebelum Outlier Removal:** RMSE = 128.49 | R² = 0.9973
-Setelah Outlier Removal:** RMSE = 0.69 | R² = 0.9999
+| Kondisi Data | RMSE | R² Score |
+| :--- | :--- | :--- |
+| Sebelum Outlier Removal | 128.49 | 0.9973 |
+| Setelah Outlier Removal | 0.69 | 0.9999 |
 
 **Kesimpulan:** Penurunan *error* (RMSE) secara drastis dari 128.49 menjadi 0.69 membuktikan bahwa sebagian besar tingkat kesalahan model murni disebabkan oleh beberapa negara dengan anomali konsumsi listrik yang sangat ekstrem. Secara umum, model terbukti sangat tangguh (*robust*) dalam memprediksi mayoritas data distribusi normal di tingkat global.
+
 
 
 
