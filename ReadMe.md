@@ -1,4 +1,4 @@
-Analisis Prediksi Permintaan Listrik Global (Global Electricity Demand) ⚡  
+** Analisis Prediksi Permintaan Listrik Global (Global Electricity Demand) ⚡ **
 
 Penelitian ini mengimplementasikan model *Machine Learning* untuk memprediksi tingkat permintaan listrik (*electricity demand*) global berdasarkan indikator makroekonomi dan bauran energi. Proyek ini bertujuan untuk memberikan analisis prediktif yang dapat digunakan dalam menyeimbangkan pertumbuhan ekonomi dengan keberlanjutan lingkungan.
 
@@ -39,3 +39,4 @@ Sebelum Outlier Removal:** RMSE = 128.49 | R² = 0.9973
 Setelah Outlier Removal:** RMSE = 0.69 | R² = 0.9999
 
 **Kesimpulan:** Penurunan *error* (RMSE) secara drastis dari 128.49 menjadi 0.69 membuktikan bahwa sebagian besar tingkat kesalahan model murni disebabkan oleh beberapa negara dengan anomali konsumsi listrik yang sangat ekstrem. Secara umum, model terbukti sangat tangguh (*robust*) dalam memprediksi mayoritas data distribusi normal di tingkat global.
+
